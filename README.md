@@ -2,13 +2,13 @@
 
 This doc is to answer the question, what is the right way to reboot a StaticKube instance if it is on the AWS DEV list to be rebooted?
 
-##Steps##
+## Steps
   
-  *For Rancher and Mission Control Nodes (no outage necessary)*<br>
-   1 A.) Safely Drain a Node and cordon the node<br>
-      -  NOTE: If the DEVAWS list contains multiple nodes, it is highly advised that this step gets performed one node at a time.<br> 
-      - **ALWAYS** ensure that there are at least two nodes, you risk causing an outage when there are less then two nodes working.<br> 
-      - Follow the steps below or navigate to here: https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/a#before-you-begin
+###  *For Rancher and Mission Control Nodes (no outage necessary)*<br>
+   > 1 A.) Safely Drain a Node and cordon the node<br>
+   >   -  *NOTE: If the DEVAWS list contains multiple nodes, it is highly advised that this step gets performed one node at a time.*<br> 
+   >   - ***ALWAYS** ensure that there are at least two nodes, you risk causing an outage when there are less then two nodes working.*<br> 
+   >>   - Follow the steps below or navigate to here: https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/a#before-you-begin
 <br><br> Use kubectl drain to remove a node from service
 You can use kubectl drain to safely evict all of your pods from a node before you perform maintenance on the node (e.g. kernel upgrade, hardware maintenance, etc.). Safe evictions allow the pod's containers to gracefully terminate and will respect the PodDisruptionBudgets you have specified.
 
@@ -36,7 +36,7 @@ identify the name of the node you wish to drain. You can list all of the nodes i
         
     *kubectl uncordon <node name>* 
 
-2. For worker nodes, it is going to depend on if we are in an outage window or not. A pre-requisite for no outage is that we need enough worker nodes so that we can cordon off one worker node, and have all workloads able to reschedule to the remaining resources. If we are in an outage window, there’s certain things we can expedite.
+2. For worker nodes, it is going to depend on if we are in an outage window or not. A pre-requisite for no outage is that we need enough worker nodes so that we can cordon off one worker node, and have all workloads able to reschedule to the remaining resources. If we are in an outage window, there’s certain things we can expedite.<br>
 A. Drain and cordon the node<br>
 o	If multiple nodes exist on the list from DEV AWS:
 	If we’re in an outage window:
