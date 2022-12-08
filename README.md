@@ -2,7 +2,7 @@
 
 This doc is to answer the question, what is the right way to reboot a StaticKube instance if it is on the AWS DEV list to be rebooted?
 
-##Steps
+##Steps##
   
   *For Rancher and Mission Control Nodes (no outage necessary)*<br>
    1 A.) Safely Drain a Node and cordon the node<br>
@@ -37,15 +37,15 @@ identify the name of the node you wish to drain. You can list all of the nodes i
     *kubectl uncordon <node name>* 
 
 2. For worker nodes, it is going to depend on if we are in an outage window or not. A pre-requisite for no outage is that we need enough worker nodes so that we can cordon off one worker node, and have all workloads able to reschedule to the remaining resources. If we are in an outage window, there’s certain things we can expedite.
-A. Drain and cordon the node
+A. Drain and cordon the node<br>
 o	If multiple nodes exist on the list from DEV AWS:
 	If we’re in an outage window:
-B. We do not care about the workloads. Drain and cordon all necessary nodes and perform the rest of the procedure in parallel.
+B. We do not care about the workloads. Drain and cordon all necessary nodes and perform the rest of the procedure in parallel.<br>
 	If we’re not in an outage window/trying to prevent outage:
-C. We care about the workloads. If we have enough resources, we can drain and cordon sequentially like we would do for the rancher/control plane nodes
-D. Shut down the server in EC2 Dashboard
-E. Start the server in EC2 Dashboard
-F. Wait for it to check back into Rancher. When it does, uncordon the node.
+C. We care about the workloads. If we have enough resources, we can drain and cordon sequentially like we would do for the rancher/control plane nodes<br>
+D. Shut down the server in EC2 Dashboard<br>
+E. Start the server in EC2 Dashboard<br>
+F. Wait for it to check back into Rancher. When it does, uncordon the node.<br>
 
 
 
